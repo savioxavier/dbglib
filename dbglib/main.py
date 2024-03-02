@@ -5,6 +5,7 @@ import re
 
 
 BLACK_ON_YELLOW = "\033[30;43m"
+BLACK_ON_RED = "\033[30;41m"
 BLUE = "\033[34m"
 CYAN = "\033[36m"
 GREEN = "\033[32m"
@@ -16,6 +17,19 @@ UNDERLINE = "\033[4m"
 DIM = "\033[2m"
 ITALIC = "\033[3m"
 RESET = "\033[0m"
+
+# Print warning message as soon as module is imported
+print(
+    inspect.cleandoc(
+        f"""
+                      
+            {BLACK_ON_RED}{BOLD} WARNING {RESET} {YELLOW}The development-only module 'dbglib' has been imported.
+                      Please ensure that it is removed, along with all imports
+                      and references as soon as you're done.
+                      
+        """
+    )
+)
 
 
 def dbg(structure: Any) -> None:
