@@ -39,6 +39,8 @@ def get_structure_type(structure):
 
 
 def syntax_highlight(structure, structure_type):
+    # Uses recursive syntax highlighting for lists and dicts
+
     if structure_type == "int":
         return f"{YELLOW}{structure:,}{RESET}"
     elif structure_type == "str":
@@ -46,14 +48,16 @@ def syntax_highlight(structure, structure_type):
     elif structure_type == "bool":
         bool_color = GREEN if structure else RED
         return f"{ITALIC}{bool_color}{structure}{RESET}"
-    elif structure_type in {"list", "set", "tuple", "str"}:
-        # Implement recursive syntax highlighting for lists
+    elif structure_type in {"list", "set", "tuple"}:
         list_with_syntax_highlight = [
             syntax_highlight(element, get_structure_type(element))
             for element in structure
         ]
 
-        return f"{BOLD}[{RESET}{', '.join(list_with_syntax_highlight)}{BOLD}]{RESET}"
+        brackets = {"list": "[]", "set": "{}", "tuple": "()"}
+        open_bracket, close_bracket = brackets[structure_type]  # string unpacking
+
+        return f"{BOLD}{open_bracket}{RESET}{', '.join(list_with_syntax_highlight)}{BOLD}{close_bracket}{RESET}"
     elif structure_type == "dict":
         dict_with_syntax_highlight = {
             syntax_highlight(k, get_structure_type(k)): syntax_highlight(
@@ -66,7 +70,7 @@ def syntax_highlight(structure, structure_type):
             f"{k}: {v}" for k, v in dict_with_syntax_highlight.items()
         )
 
-        open_curly, close_curly = "{", "}"  # f-string limitations
+        open_curly, close_curly = "{}"  # string unpacking because f-string limitations
 
         return f"{BOLD}{open_curly}{RESET}{joined_dict}{BOLD}{close_curly}{RESET}"
 
