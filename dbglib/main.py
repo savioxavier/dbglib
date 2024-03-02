@@ -77,7 +77,7 @@ def syntax_highlight(structure, structure_type):
     return f"{CYAN}{str(structure)}{RESET}"
 
 
-def dbg(structure: Any) -> None:
+def dbg(structure: Any) -> Any:
     stack = inspect.stack()
 
     for frame in stack:
