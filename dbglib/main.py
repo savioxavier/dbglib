@@ -83,7 +83,7 @@ def dbg(structure: Any) -> None:
             in_function = calframe[1][3]
 
             print(
-                f"{BLACK_ON_YELLOW} dbg {RESET} {BLUE}{basename}:{DIM}{line_number}{RESET} {DIM}({in_function}){RESET} {YELLOW}{DIM}|{RESET} {GREEN}{structure_input} {DIM}={RESET} {CYAN}{structure_value} {MAGENTA}({structure_type}{extras}){RESET}"
+                f"{BLACK_ON_YELLOW} dbg {RESET} {BLUE}{basename}:{DIM}{line_number}{RESET} {DIM}({in_function}){RESET} {YELLOW}{DIM}->{RESET} {GREEN}{structure_input} {DIM}={RESET} {CYAN}{structure_value} {MAGENTA}({structure_type}{extras}){RESET}"
             )
 
             break
