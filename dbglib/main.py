@@ -32,6 +32,30 @@ print(
 )
 
 
+def get_structure_type(structure):
+    structure_type = str(type(structure))
+    # do some regex substitution to get a clear type representation
+    return re.sub(r"<class '(.*)'>", r"\1", structure_type)
+
+
+def syntax_highlight(structure, structure_type):
+    if structure_type == "int":
+        return f"{YELLOW}{structure:,}{RESET}"
+    elif structure_type == "str":
+        return f"{GREEN}'{structure}'{RESET}"
+    elif structure_type == "bool":
+        bool_color = GREEN if structure else RED
+        return f"{ITALIC}{bool_color}{structure}{RESET}"
+    elif structure_type in {"list", "set", "tuple", "str"}:
+        new = []
+        for element in structure:
+            new.append(syntax_highlight(element, get_structure_type(element)))
+
+        return f"{RESET}[{RESET}{', '.join(new)}]{RESET}"
+
+    return f"{BLUE}{str(structure)}{RESET}"
+
+
 def dbg(structure: Any) -> None:
     stack = inspect.stack()
 
@@ -59,20 +83,14 @@ def dbg(structure: Any) -> None:
             basename = Path(filename).name
             line_number = frame.lineno
             structure_input = line[start:end]
-            structure_value = structure
-
-            structure_type = str(type(structure))
-
-            # do some regex substitution to get a clear type representation
-            structure_type = re.sub(r"<class '(.*)'>", r"\1", structure_type)
-
-            extras = ""
+            structure_type = get_structure_type(structure)
+            structure_value = syntax_highlight(structure, structure_type)
 
             # special modifiers for certain types
-            if structure_type == "int":
-                structure_value = f"{structure_value:,}"  # auto comma delimiters
-            elif structure_type in {"list", "set", "tuple", "str"}:
-                structure_len = len(structure_value)
+            extras = ""
+
+            if structure_type in {"list", "set", "tuple", "str"}:
+                structure_len = len(structure)
                 extras += f", len={structure_len}"
 
             # getting where the dbg function was called is a bit harder
@@ -83,7 +101,7 @@ def dbg(structure: Any) -> None:
             in_function = calframe[1][3]
 
             print(
-                f"{BLACK_ON_YELLOW} dbg {RESET} {BLUE}{basename}:{DIM}{line_number}{RESET} {DIM}({in_function}){RESET} {YELLOW}{DIM}->{RESET} {GREEN}{structure_input} {DIM}={RESET} {CYAN}{structure_value} {MAGENTA}({structure_type}{extras}){RESET}"
+                f"{BLACK_ON_YELLOW} dbg {RESET} {BLUE}{basename}:{DIM}{line_number}{RESET} {DIM}({in_function}){RESET} {YELLOW}{DIM}->{RESET} {structure_input} {DIM}={RESET} {structure_value} {MAGENTA}({structure_type}{extras}){RESET}"
             )
 
             break
