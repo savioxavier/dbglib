@@ -126,3 +126,5 @@ def dbg(structure: Any) -> None:
             )
 
             break
+
+    return structure
