@@ -53,7 +53,22 @@ def syntax_highlight(structure, structure_type):
             for element in structure
         ]
 
-        return f"{RESET}[{RESET}{', '.join(list_with_syntax_highlight)}]{RESET}"
+        return f"{BOLD}[{RESET}{', '.join(list_with_syntax_highlight)}{BOLD}]{RESET}"
+    elif structure_type == "dict":
+        dict_with_syntax_highlight = {
+            syntax_highlight(k, get_structure_type(k)): syntax_highlight(
+                v, get_structure_type(v)
+            )
+            for k, v in structure.items()
+        }
+
+        joined_dict = ", ".join(
+            f"{k}: {v}" for k, v in dict_with_syntax_highlight.items()
+        )
+
+        open_curly, close_curly = "{", "}"  # f-string limitations
+
+        return f"{BOLD}{open_curly}{RESET}{joined_dict}{BOLD}{close_curly}{RESET}"
 
     return f"{CYAN}{str(structure)}{RESET}"
 
@@ -91,7 +106,7 @@ def dbg(structure: Any) -> None:
             # special modifiers for certain types
             extras = ""
 
-            if structure_type in {"list", "set", "tuple", "str"}:
+            if structure_type in {"dict", "list", "set", "tuple", "str"}:
                 structure_len = len(structure)
                 extras += f", len={structure_len}"
 
