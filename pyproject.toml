@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "debuggery"
+name = "dbglib"
 version = "0.1.1"
 description = ""
 authors = ["Savio Xavier <savioxavier112@gmail.com>"]
@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.9"
 
-[tool.poetry_bumpversion.file."debuggery/__init__.py"]
+[tool.poetry_bumpversion.file."dbglib/__init__.py"]
 
 [build-system]
 requires = ["poetry-core"]
