@@ -47,13 +47,15 @@ def syntax_highlight(structure, structure_type):
         bool_color = GREEN if structure else RED
         return f"{ITALIC}{bool_color}{structure}{RESET}"
     elif structure_type in {"list", "set", "tuple", "str"}:
-        new = []
-        for element in structure:
-            new.append(syntax_highlight(element, get_structure_type(element)))
+        # Implement recursive syntax highlighting for lists
+        list_with_syntax_highlight = [
+            syntax_highlight(element, get_structure_type(element))
+            for element in structure
+        ]
 
-        return f"{RESET}[{RESET}{', '.join(new)}]{RESET}"
+        return f"{RESET}[{RESET}{', '.join(list_with_syntax_highlight)}]{RESET}"
 
-    return f"{BLUE}{str(structure)}{RESET}"
+    return f"{CYAN}{str(structure)}{RESET}"
 
 
 def dbg(structure: Any) -> None:
