@@ -8,7 +8,13 @@ dbglib is a library that provides quick and easy debugging for your Python scrip
 
 dbglib currently exports one function named `dbg`. It's inspired by Rust's `dbg!(...)` macro and provides a wide variety of information useful for debugging anything in your code
 
-Usage:
+**Installation**
+
+```text
+pip install dbglib
+```
+
+**Usage**
 
 ```py
 from dbglib import dbg
