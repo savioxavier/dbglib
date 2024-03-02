@@ -22,11 +22,11 @@ RESET = "\033[0m"
 print(
     inspect.cleandoc(
         f"""
-                      
+            {RESET}
             {BLACK_ON_RED}{BOLD} WARNING {RESET} {YELLOW}The development-only module 'dbglib' has been imported.
                       Please ensure that it is removed, along with all imports
                       and references as soon as you're done.
-                      
+            {RESET}
         """
     )
 )
