@@ -89,8 +89,10 @@ num = 5
 if dbg(num < 10):
     print("It's less than ten!")
 
-# here, dbg will print the boolean result of the conditional `num < 10` (which in this case is True) and actually evaluate the if block as normal and print the statement above
-# If the dbg conditional evaluates to False, it will print the dbg output but it will not execute anything inside the if block
+# here, dbg will print the boolean result of the conditional `num < 10` 
+# (which in this case is True) and actually evaluate the if block as normal and print the statement above
+# If the dbg conditional evaluates to False,
+# it will print the dbg output but it will not execute anything inside the if block
 ```
 
 - iterables
