@@ -43,7 +43,7 @@ dbglib can also be used as conditionals in if statements while dynamically evalu
 ![image](https://github.com/savioxavier/dbglib/assets/38729705/1bf3d752-608c-4fc7-b42f-ec7a48072c4f)
 
 > [!WARNING]
-> Once imported, dbglib prints out a warning message at the very top (see above). This is to remind you that the module has to be removed as you're done with debugging. Trust me, you _definitely_ do not want to see random debug logs in production
+> Once imported, dbglib prints out a warning message at the very top (see above). This is to remind you that the module has to be removed as soon as you're done with debugging. Trust me, you _definitely_ do not want to see random debug logs in production
 >
 > The best way to remove dbglib before deploying to production is by removing the main `from dbglib import dbg` import and see if your IDE can automatically detect undefined names and auto remove all `dbg()` calls
 
