@@ -34,7 +34,7 @@ dbg(a)
   - variable type
   - length, if variable type is an iterable
 
-Variable values are syntax highlighted and color coded so that they are easy to read
+Variable values are syntax highlighted and color coded according to type so that they are easy to read. All iterables are recursively syntax highlighted so that they can be properly displayed, no matter how deep the level of nesting is
 
 dbglib can also be used as conditionals in if statements while dynamically evaluating them (see examples below)
 
