@@ -110,7 +110,7 @@ def dbg(structure: Any) -> Any:
             # special modifiers for certain types
             extras = ""
 
-            if structure_type in {"dict", "list", "set", "tuple", "str"}:
+            if hasattr(structure, "__len__"):
                 structure_len = len(structure)
                 extras += f", len={structure_len}"
 
